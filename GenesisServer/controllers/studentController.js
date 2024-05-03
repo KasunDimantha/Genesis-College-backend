@@ -52,13 +52,13 @@ const getStudentByPayment = async (req, res) => {
     }
 }
 
-// get student by course entrolled
-const getStudentByCourse = async (req, res) => {
-    const { courseentrolled } = req.params
+// get student by email
+const getStudentByEmail = async (req, res) => {
+    const { email } = req.params
     console.log(req.params)
 
     try {
-        const student = await Student.find({'course.course_entroll': courseentrolled})
+        const student = await Student.find({email: email})
         console.log(student)
         res.status(200).json(student)
     } catch (error) {
@@ -66,31 +66,6 @@ const getStudentByCourse = async (req, res) => {
     }
 }
 
-// get students by semester
-const getStudentBySemester = async (req, res) => {
-    const { semester } = req.params
-
-    try {
-        const student = await Student.find({'semester.semester_name': semester})
-        res.status(200).json(student)
-    } catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-}
-
-
-// get student by module
-const getStudentByStudentid = async (req, res) => {
-    const { id } = req.params
-    console.log(id)
-
-    try {
-        const student = await Student.find({student_id: id})
-        res.status(200).json(student)
-    } catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-}
 
 // update a student data
 const updateStudent = async (req, res) => {
@@ -133,9 +108,7 @@ module.exports = {
     getAllStudents,
     getStudent,
     getStudentByPayment,
-    getStudentByCourse,
-    getStudentBySemester,
-    getStudentByStudentid,
+    getStudentByEmail,
     updateStudent,
     deleteStudent
 }

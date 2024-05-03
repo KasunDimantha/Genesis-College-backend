@@ -87,7 +87,6 @@ const addUser = async (req, res) => {
 const getAllUser = async (req, res) => {
     const {role} =  req.params
     const users = await User.find({role}).sort({createdAt: -1})
-    console.log(users)
 
     res.status(200).json(users)
 }
@@ -98,9 +97,22 @@ const getUserByEmail = async (req, res) => {
     console.log(email)
 
     const users = await User.find({email})
-    console.log(users)
 
     res.status(200).json(users)
+}
+
+const getUserByID = async (req, res) => {
+    const {id} =  req.params;
+    console.log(id)
+
+    try {
+        const user = await User.find({ _id: id})
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+        console.log(error)
+    }
+
 }
 
 const getAll = async (req, res) => {
@@ -111,9 +123,11 @@ const getAll = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { id } = req.params
+    console.log(id)
     
     try {
         const user = await User.find({_id: id})
+        console.log(user)
         res.status(200).json(user)
     } catch (error) {
         res.status(400).json({ message: error.message })
@@ -175,6 +189,7 @@ module.exports = {
     addUser,
     getAllUser,
     getUserByEmail,
+    getUserByID,
     getUser,
     deleteUser,
     updateUser,

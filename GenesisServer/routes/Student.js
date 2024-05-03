@@ -7,9 +7,7 @@ const {
     getAllStudents,
     getStudent,
     getStudentByPayment,
-    getStudentByCourse,
-    getStudentBySemester,
-    getStudentByStudentid,
+    getStudentByEmail,
     updateStudent,
     deleteStudent,
 } = require('../controllers/studentController')
@@ -29,14 +27,8 @@ router.get('/', getAllStudents)
 // get student by payment
 router.get('/payment:payment', getStudentByPayment)
 
-// get student by course
-router.get('/course:courseentrolled', getStudentByCourse)
-
-// get students by semester
-router.get('/semester:semester', getStudentBySemester)
-
-// get student by module
-router.get('/module:id', getStudentByStudentid)
+// get student by email
+router.get('/email:email', getStudentByEmail)
 
 // get a singe student data
 router.get('/:id', getStudent)

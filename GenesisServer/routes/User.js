@@ -6,6 +6,7 @@ const {
     addUser,
     getAllUser,
     getUserByEmail,
+    getUserByID,
     getUser,
     deleteUser,
     updateUser,
@@ -44,6 +45,9 @@ router.get('/role:role', getAllUser)
 
 // get all student/teacher/admin(seperatlly)
 router.get('/email:email', getUserByEmail)
+
+// get a single student/teacher/admin by use ID
+router.get('/id:id', getUserByID)
 
 // get a single student/teacher/admin
 //router.get('/:email', getUser)

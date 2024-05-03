@@ -9,6 +9,8 @@ const userlsRoutes = require('./routes/UserLS');
 const userRoutes = require('./routes/User');
 //const adminRoutes = require('./routes/Admin');
 const studentRoutes = require('./routes/Student');
+const paymentRoutes = require('./routes/Payment');
+const attendenceRoutes = require('./routes/Atendence');
 
 //express app
 const app = express();
@@ -38,6 +40,8 @@ app.use('/UserLS', userlsRoutes);
 app.use('/User', userRoutes);
 //app.use('/Admin', adminRoutes);
 app.use('/Student', studentRoutes);
+app.use('/Payment', paymentRoutes);
+app.use('/Atendence', attendenceRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONG_URL)
