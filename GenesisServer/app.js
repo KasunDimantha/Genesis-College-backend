@@ -5,6 +5,10 @@ const cors = require("cors")
 const path = require('path');
 
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+
+
 const userlsRoutes = require('./routes/UserLS');
 const userRoutes = require('./routes/User');
 //const adminRoutes = require('./routes/Admin');
@@ -42,6 +46,30 @@ app.use('/User', userRoutes);
 app.use('/Student', studentRoutes);
 app.use('/Payment', paymentRoutes);
 app.use('/Atendence', attendenceRoutes);
+
+
+// swagger connection  
+
+const options = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'Edume API Documentation',
+        version: '1.0.0',
+      },
+      servers: [
+        {
+            api: 'http://localhost:3002/'
+        }
+      ]
+    },
+    apis: ['./app.js'], // files containing annotations as above
+  };
+
+  const swaggerSpec = swaggerJsDoc(options);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 
 // connect to db
 mongoose.connect(process.env.MONG_URL)
